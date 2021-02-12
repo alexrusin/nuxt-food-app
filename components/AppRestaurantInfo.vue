@@ -1,6 +1,6 @@
 <template>
   <section class="restaurantinfo">
-    <div v-for="store in fooddata" :key="store.id">
+    <div v-for="store in dataSource" :key="store.id">
       <h2>{{ store.name }}</h2>
       <p>Delivery Time {{ store.deliveryTime }}</p>
       <p>Rating {{ store.rating }}</p>
@@ -15,9 +15,11 @@
               <h4>{{ menuitem.item }}</h4>
               <p>{{ priceFormatting(menuitem.price) }}</p>
             </div>
-            <button class="ghost">
-              View Item
-            </button>
+            <nuxt-link :to="`/items/${menuitem.id}`">
+              <button class="ghost">
+                View Item
+              </button>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -26,13 +28,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 
 export default {
-  computed: {
-    ...mapState([
-      'fooddata'
-    ])
+  props: {
+    dataSource: {
+      type: [Array, Object]
+    }
   },
   methods: {
     priceFormatting (price) {
