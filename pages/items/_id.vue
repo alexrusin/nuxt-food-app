@@ -101,6 +101,14 @@ export default {
 
   methods: {
     addToCart() {
+      let formOutput = {
+        item: thi.currentItem.item,
+        count: this.count,
+        options: this.itemOptions,
+        addOns: this.itemAddons,
+        combinedPrice: this.combinedPrice
+      }
+      
       this.cartSubmitted = true
     }
   }
