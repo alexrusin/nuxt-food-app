@@ -12,7 +12,7 @@
 
       <div class="quantity">
         <input v-model="count" type="number" min="1">
-        <button @click="addToCart" class="primary">
+        <button class="primary" @click="addToCart">
           Add to Cart - ${{ combinedPrice }}
         </button>
       </div>
@@ -100,16 +100,17 @@ export default {
   },
 
   methods: {
-    addToCart() {
-      let formOutput = {
-        item: thi.currentItem.item,
+    addToCart () {
+      const formOutput = {
+        item: this.currentItem.item,
         count: this.count,
         options: this.itemOptions,
         addOns: this.itemAddons,
         combinedPrice: this.combinedPrice
       }
-      
+
       this.cartSubmitted = true
+      this.$store.commit('addToCart', formOutput)
     }
   }
 }

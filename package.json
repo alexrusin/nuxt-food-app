@@ -14,7 +14,8 @@
     "@nuxt/http": "latest",
     "axios": "^0.21.1",
     "node-cron": "^2.0.3",
-    "nuxt": "latest"
+    "nuxt": "latest",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
