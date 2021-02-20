@@ -36,7 +36,7 @@ export default {
   */
   plugins: [
     '~/plugins/getfood.server.js',
-    '~/plugins/validate.js'
+    '~/plugins/validate.client.js'
   ],
 
   /*
