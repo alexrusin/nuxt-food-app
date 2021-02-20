@@ -23,8 +23,9 @@
         </legend>
         <div v-for="option in currentItem.options" :key="option">
           <input
+            @change="validationError = false"
             :id="option"
-            v-model="itemOptions"
+            v-model="$v.itemOptions.$model"
             type="radio"
             name="option"
             :value="option"
@@ -54,6 +55,9 @@
           restaurants
         </nuxt-link>
       </AppToast>
+      <AppToast v-if="validationError">
+        Please select one of the options
+      </AppToast>
     </section>
 
     <section class="options">
@@ -66,6 +70,7 @@
 <script>
 import { mapState } from 'vuex'
 import AppToast from '@/components/AppToast.vue'
+import { required } from 'vuelidate/lib/validators'
 export default {
   components: { AppToast },
   data () {
@@ -75,7 +80,13 @@ export default {
       itemOptions: '',
       itemAddons: [],
       itemSizeAndCost: [],
-      cartSubmitted: false
+      cartSubmitted: false,
+      validationError: false
+    }
+  },
+  validations: {
+    itemOptions: {
+      required
     }
   },
   computed: {
@@ -101,6 +112,10 @@ export default {
 
   methods: {
     addToCart () {
+      if (this.currentItem.options && !this.$v.itemOptions.required) {
+        this.validationError = true
+        return
+      }
       const formOutput = {
         item: this.currentItem.item,
         count: this.count,

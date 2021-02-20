@@ -35,7 +35,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/getfood.server.js'
+    '~/plugins/getfood.server.js',
+    '~/plugins/validate.js'
   ],
 
   /*
